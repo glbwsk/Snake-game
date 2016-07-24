@@ -17,7 +17,7 @@ public:
 
     void drawSnake(sf::RenderWindow &window);
     void input();
-    void update();
+    void update(sf::Time elapsed);
     void changePosition(float x, float y);
 
     //setters & getters
@@ -33,8 +33,8 @@ private:
     float segmentSize;
     float speed;
 
-    sf::Time timeSinceLastUpdate;
-    sf::Time timePerFrame;
+    sf::Time timeSinceSnakeUpdate;
+    sf::Time speedParam;
     sf::Clock clock;
 };
 

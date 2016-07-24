@@ -8,19 +8,21 @@
 class Game
 {
 public:
-    int windowWidth;
-    int windowHeight;
 
     Game();
     ~Game();
     void runGame();
-    void draw();
+    void processInput();
+    void updateGame(sf::Time elapsed);
+    void drawGame();
 
 private:
-    bool gameOver;
+    sf::Time timePerFrame;
+    sf::Time timeSinceLastUpdate;
     sf::RenderWindow window;
     Snake snake;
     Food food;
+    bool gameOver;
 };
 
 #endif // _GAME_HPP_
