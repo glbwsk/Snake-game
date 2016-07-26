@@ -1,27 +1,25 @@
 #include "Game.hpp"
 #include "snake.hpp"
-#include <iostream>
-#include <fstream>
 
-Game::Game()
+GameEngine::GameEngine()
 : window(sf::VideoMode(800, 600), "SNAKE v0.1b")
 {
     window.setFramerateLimit(60);
     timePerFrame=sf::seconds(1.0/60.0);
     timeSinceLastUpdate = sf::Time::Zero;
-    gameOver=false;
+    gameRunning=true;
 }
 
-Game::~Game()
+GameEngine::~GameEngine()
 {
     //
 }
 
-void Game::runGame()
+void GameEngine::runGame()
 {
     sf::Clock clock;
     sf::Time elapsedTime;
-    while(!gameOver)
+    while(gameRunning)
     {
         elapsedTime = clock.restart();
         processInput();
@@ -32,29 +30,29 @@ void Game::runGame()
     window.close();
 }
 
-void Game::processInput()
+void GameEngine::processInput()
 {
     snake.input();
 }
 
-void Game::updateGame(sf::Time elapsed)
+void GameEngine::updateGame(sf::Time elapsed)
 {
     timeSinceLastUpdate += elapsed;
     while(timeSinceLastUpdate > timePerFrame)
     {
-        snake.update(elapsed);
         food.handleFoodCollision(snake);
+        snake.update(elapsed);
         timeSinceLastUpdate -= timePerFrame;
     }
 }
 
-void Game::drawGame()
+void GameEngine::drawGame()
 {
     sf::Event event;
     while (window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            gameOver=true;
+            gameRunning=false;
     }
 
     window.clear();

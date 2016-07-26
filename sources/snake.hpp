@@ -25,6 +25,7 @@ public:
     float getspeed();
     void addSegment(sf::RectangleShape seg);
     sf::RectangleShape getSnakesHead();
+    float modSub(float num, float modulo);
 
 private:
     std::list<sf::RectangleShape> snakeSegments;
@@ -36,6 +37,7 @@ private:
     sf::Time timeSinceSnakeUpdate;
     sf::Time speedParam;
     sf::Clock clock;
+
 };
 
 #endif

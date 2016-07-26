@@ -78,7 +78,10 @@ void Snake::changePosition(float x, float y)
 {
     sf::RectangleShape newHead = snakeSegments.front();
     snakeSegments.front().setFillColor(sf::Color(250, 250, 50));
-    newHead.move(x, y);
+    sf::Vector2f currPositon=newHead.getPosition();
+    currPositon.x = modSub(currPositon.x+x, 800);
+    currPositon.y = modSub(currPositon.y+y, 600);
+    newHead.setPosition(currPositon);
     snakeSegments.push_front(newHead);
     snakeSegments.pop_back();
 }
@@ -101,4 +104,11 @@ void Snake::setspeed(float sp)
 float Snake::getspeed()
 {
     return speed;
+}
+
+float Snake::modSub(float num, float modulo)
+{
+    if(num >= modulo) return num-modulo;
+    else if(num < 0 ) return modulo;
+    else return num;
 }

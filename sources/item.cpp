@@ -1,6 +1,4 @@
 #include "item.hpp"
-#include <ctime>
-#include <cstdlib>
 
 Food::Food()
 {
