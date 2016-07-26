@@ -5,8 +5,7 @@ Snake::Snake()
     speed=10;
     segmentSize=19;
     currDirection=STOP;
-    timeSinceLastUpdate = sf::Time::Zero;
-    timePerFrame = sf::seconds(1/speed);
+    timeSinceSnakeUpdate = sf::Time::Zero;
     singleSegment.setSize(sf::Vector2f(segmentSize, segmentSize));
     singleSegment.setFillColor(sf::Color(225, 32, 32));
     singleSegment.setPosition(sf::Vector2f(400, 300));
@@ -47,13 +46,12 @@ void Snake::input()
     }
 }
 
-void Snake::update()
+void Snake::update(sf::Time elapsed)
 {
-    timePerFrame = sf::seconds(1/speed);
-    sf::Time elapsedTime = clock.restart();
-    timeSinceLastUpdate += elapsedTime;
+    sf::Time speedParam = sf::seconds(1/speed);
+    timeSinceSnakeUpdate += elapsed;
 
-    while(timeSinceLastUpdate > timePerFrame)
+    while(timeSinceSnakeUpdate > speedParam)
     {
         switch (currDirection)
         {
@@ -72,7 +70,7 @@ void Snake::update()
         case STOP:
             break;
         }
-        timeSinceLastUpdate -= timePerFrame;
+        timeSinceSnakeUpdate -= speedParam;
     }
 }
 
@@ -80,7 +78,10 @@ void Snake::changePosition(float x, float y)
 {
     sf::RectangleShape newHead = snakeSegments.front();
     snakeSegments.front().setFillColor(sf::Color(250, 250, 50));
-    newHead.move(x, y);
+    sf::Vector2f currPositon=newHead.getPosition();
+    currPositon.x = modSub(currPositon.x+x, 800);
+    currPositon.y = modSub(currPositon.y+y, 600);
+    newHead.setPosition(currPositon);
     snakeSegments.push_front(newHead);
     snakeSegments.pop_back();
 }
@@ -103,4 +104,11 @@ void Snake::setspeed(float sp)
 float Snake::getspeed()
 {
     return speed;
+}
+
+float Snake::modSub(float num, float modulo)
+{
+    if(num >= modulo) return num-modulo;
+    else if(num < 0 ) return modulo;
+    else return num;
 }

@@ -1,14 +1,10 @@
 #include "item.hpp"
-#include <random>
-#include <ctime>
-#include <cstdlib>
 
 Food::Food()
 {
     setRandomizedPosition();
     foodItem.setRadius(10);
     foodItem.setFillColor(sf::Color(0, 111, 250));
-    srand(time(NULL));
 }
 
 Food::~Food()
@@ -32,8 +28,9 @@ void Food::drawFood(sf::RenderWindow &window)
 
 void Food::setRandomizedPosition()
 {
-    x = rand()%800;
-    y = rand()%600;
+    srand(time(NULL));
+    x = rand()%790;
+    y = rand()%590;
     foodItem.setPosition(sf::Vector2f(x, y));
 }
 
@@ -45,7 +42,7 @@ void Food::handleFoodCollision(Snake &snake)
         for(int i=0; i<2; i++) snake.addSegment(head);
         setRandomizedPosition();
         speed=snake.getspeed();
-        speed += 0.3;
+        speed++;
         snake.setspeed(speed);
     }
 }

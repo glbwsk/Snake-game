@@ -4,23 +4,36 @@
 #include <SFML/Graphics.hpp>
 #include "snake.hpp"
 #include "item.hpp"
+#include "GameState.hpp"
+#include <vector>
 
-class Game
+class GameEngine
 {
 public:
-    int windowWidth;
-    int windowHeight;
 
-    Game();
-    ~Game();
+    GameEngine();
+    ~GameEngine();
+
+    void changeState(GameState* state);
+    void pushState(GameState* state);
+    void popState();
+
     void runGame();
-    void draw();
+    void processInput();
+    void updateGame(sf::Time elapsed);
+    void drawGame();
+
+    bool running() { return gameRunning; }
+    void quit() { gameRunning = false; }
 
 private:
-    bool gameOver;
+    sf::Time timePerFrame;
+    sf::Time timeSinceLastUpdate;
     sf::RenderWindow window;
     Snake snake;
     Food food;
+    bool gameRunning;
+    std::vector<GameState*> states;
 };
 
 #endif // _GAME_HPP_

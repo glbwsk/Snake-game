@@ -17,7 +17,7 @@ public:
 
     void drawSnake(sf::RenderWindow &window);
     void input();
-    void update();
+    void update(sf::Time elapsed);
     void changePosition(float x, float y);
 
     //setters & getters
@@ -25,6 +25,7 @@ public:
     float getspeed();
     void addSegment(sf::RectangleShape seg);
     sf::RectangleShape getSnakesHead();
+    float modSub(float num, float modulo);
 
 private:
     std::list<sf::RectangleShape> snakeSegments;
@@ -33,9 +34,10 @@ private:
     float segmentSize;
     float speed;
 
-    sf::Time timeSinceLastUpdate;
-    sf::Time timePerFrame;
+    sf::Time timeSinceSnakeUpdate;
+    sf::Time speedParam;
     sf::Clock clock;
+
 };
 
 #endif

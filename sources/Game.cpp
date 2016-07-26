@@ -1,44 +1,64 @@
 #include "Game.hpp"
 #include "snake.hpp"
 
-Game::Game()
+GameEngine::GameEngine()
 : window(sf::VideoMode(800, 600), "SNAKE v0.1b")
 {
     window.setFramerateLimit(60);
-    windowWidth=800;
-    windowHeight=600;
-    gameOver=false;
+    timePerFrame=sf::seconds(1.0/60.0);
+    timeSinceLastUpdate = sf::Time::Zero;
+    gameRunning=true;
 }
 
-Game::~Game()
+GameEngine::~GameEngine()
 {
     //
 }
 
-void Game::runGame()
+void GameEngine::runGame()
 {
-    while(!gameOver)
-        draw();
+    sf::Clock clock;
+    sf::Time elapsedTime;
+    while(gameRunning)
+    {
+        elapsedTime = clock.restart();
+        processInput();
+        updateGame(elapsedTime);
+        drawGame();
+    }
 
     window.close();
 }
 
-void Game::draw()
+void GameEngine::processInput()
+{
+    snake.input();
+}
+
+void GameEngine::updateGame(sf::Time elapsed)
+{
+    timeSinceLastUpdate += elapsed;
+    while(timeSinceLastUpdate > timePerFrame)
+    {
+        food.handleFoodCollision(snake);
+        snake.update(elapsed);
+        timeSinceLastUpdate -= timePerFrame;
+    }
+}
+
+void GameEngine::drawGame()
 {
     sf::Event event;
     while (window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
-            gameOver=true;
+            gameRunning=false;
     }
 
     window.clear();
-        snake.drawSnake(window);
-        food.drawFood(window);
-        snake.input();
-        snake.update();
-        food.handleFoodCollision(snake);
 
+    snake.drawSnake(window);
+    food.drawFood(window);
 
     window.display();
 }
