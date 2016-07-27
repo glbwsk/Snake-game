@@ -46,11 +46,15 @@
 		<Linker>
 			<Add directory="C:/SFML-2.3.2/lib" />
 		</Linker>
-		<Unit filename="Game.cpp" />
-		<Unit filename="Game.hpp" />
-		<Unit filename="item.cpp" />
-		<Unit filename="item.hpp" />
+		<Unit filename="food.cpp" />
+		<Unit filename="food.hpp" />
+		<Unit filename="gameengine.cpp" />
+		<Unit filename="gameengine.hpp" />
+		<Unit filename="gamestate.cpp" />
+		<Unit filename="gamestate.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="playingstate.cpp" />
+		<Unit filename="playingstate.hpp" />
 		<Unit filename="snake.cpp" />
 		<Unit filename="snake.hpp" />
 		<Extensions>

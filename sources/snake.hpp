@@ -1,10 +1,9 @@
-#ifndef _SNAKE_HPP_
-#define _SNAKE_HPP_
+#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <list>
 
-enum Direction
+enum class Direction
 {
     STOP, LEFT, RIGHT, UP, DOWN
 };
@@ -12,32 +11,36 @@ enum Direction
 class Snake
 {
 public:
-    Snake();
+
+    Snake(int mapWidth, int mapHeight);
     ~Snake();
 
-    void drawSnake(sf::RenderWindow &window);
-    void input();
-    void update(sf::Time elapsed);
-    void changePosition(float x, float y);
+    //main methods
+    void DrawSnake(sf::RenderWindow &window);
+    void HandleSnakeInput();
+    void UpdateSnake(const float secElapsed);
+    void ChangePosition(float x, float y);
 
     //setters & getters
-    void setspeed(float sp);
-    float getspeed();
-    void addSegment(sf::RectangleShape seg);
-    sf::RectangleShape getSnakesHead();
-    float modSub(float num, float modulo);
+    void SetSpeed(float speed) { this->speed=speed; }
+    float GetSpeed() { return speed; }
+    void AddSegment(sf::RectangleShape seg);
+    sf::RectangleShape GetSnakesHead();
+
+    //utils
+    float FloatMod(float num, float modulo);
 
 private:
+
+    //body
     std::list<sf::RectangleShape> snakeSegments;
     sf::RectangleShape singleSegment;
-    Direction currDirection;
     float segmentSize;
+
+    //movement
+    Direction currDirection;
     float speed;
-
-    sf::Time timeSinceSnakeUpdate;
-    sf::Time speedParam;
-    sf::Clock clock;
-
+    float timeSinceSnakeUpdate;
+    int mapWidth, mapHeight;
 };
 
-#endif
