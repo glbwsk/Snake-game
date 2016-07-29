@@ -2,21 +2,23 @@
 
 #include "gamestate.hpp"
 #include "food.hpp"
+#include "collision.hpp"
 
 class GameStatePlaying : public GameState
 {
 public:
 
     GameStatePlaying(GameEngine* game);
-    ~GameStatePlaying();
+    ~GameStatePlaying()=default;
 
-    virtual void Draw(sf::RenderWindow &window);
-    virtual void Update(const float secElapsed);
-    virtual void HandleInput();
+    virtual void Draw(sf::RenderWindow &window) override;
+    virtual void Update(const float secElapsed) override;
+    virtual void HandleInput() override;
 
 private:
 
     float timeSinceLastUpdate;
     Snake snake;
     Food food;
+    Collision collision;
 };

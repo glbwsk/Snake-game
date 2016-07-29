@@ -1,31 +1,35 @@
 #include "Snake.hpp"
 
-Snake::Snake(int mapWidth, int mapHeight)
+Snake::Snake(int mapWidth, int mapHeight, int segmentSize, int initLength)
 {
     this->mapWidth=mapWidth;
     this->mapHeight=mapHeight;
+    this->segmentSize=segmentSize;
+    this->initLength=initLength;
 
     //speed parameters
     currDirection = Direction::STOP;
     speed = 15;
-    segmentSize = 19.0;
     timeSinceSnakeUpdate = 0.0;
 
     //setting first segment
     singleSegment.setSize( sf::Vector2f(segmentSize, segmentSize) );
     singleSegment.setFillColor( sf::Color(225, 32, 32) );
-    singleSegment.setPosition( sf::Vector2f(400, 300) );
+    singleSegment.setPosition( sf::Vector2f(mapWidth/2, mapHeight/2) );
     AddSegment(singleSegment);
 
-    //additional segments in different color
+    //additional starting segments are in different color
     singleSegment.setFillColor( sf::Color(250, 250, 50) );
-    for(int i=0; i<5; i++)
+    for(int i=0; i<initLength-1; i++)
+    {
+        singleSegment.move(0, segmentSize+1);
         AddSegment(singleSegment);
+    }
 }
 
 Snake::~Snake()
 {
-    //
+    while(!snakeSegments.empty()) snakeSegments.pop_back();
 }
 
 void Snake::DrawSnake(sf::RenderWindow &window)
@@ -98,19 +102,29 @@ void Snake::ChangePosition(float x, float y)
     snakeSegments.pop_back();
 }
 
+float Snake::FloatMod(float num, float modulo)
+{
+    if( num >= modulo ) return num-modulo;
+    else if( num < 0 ) return modulo;
+    else return num;
+}
+
+sf::RectangleShape Snake::GetSnakesSegment(unsigned int N)
+{
+    std::list<sf::RectangleShape>::iterator seg = snakeSegments.begin();
+    if (snakeSegments.size() > N)
+    {
+        std::advance(seg, N);
+    }
+    return *seg;
+}
+
 void Snake::AddSegment(sf::RectangleShape seg)
 {
     snakeSegments.push_back(seg);
 }
 
-sf::RectangleShape Snake::GetSnakesHead()
+int Snake::GetSnakeLength()
 {
-    return snakeSegments.front();
-}
-
-float Snake::FloatMod(float num, float modulo)
-{
-    if( num >= modulo ) return num-modulo;
-    else if (num < 0 ) return modulo;
-    else return num;
+    return snakeSegments.size();
 }

@@ -8,21 +8,22 @@ class Food
 public:
 
     Food(int mapWidth, int mapHeight, int step);
-    ~Food();
-
-    //methods for collisons
-    void HandleCollision(Snake &snake);
-    bool Collision(sf::RectangleShape snakesHead);
+    ~Food()=default;
 
     //methods for drawing
     void DrawFood(sf::RenderWindow &window);
     void SetRandomizedPosition();
+
+    //setters & getters
+    sf::CircleShape GetFoodShape() { return foodShape; };
 
 private:
 
     sf::CircleShape foodShape;
     int radius;
 
+    //map resolution
+    //step is sigle snake move (segment+1)
     int mapWidth, mapHeight, step;
 };
 

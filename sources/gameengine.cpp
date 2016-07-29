@@ -15,7 +15,8 @@ GameEngine::GameEngine()
 
 GameEngine::~GameEngine()
 {
-    while(!states.empty()) PopState();
+    while(!states.empty())
+        PopState();
 }
 
 void GameEngine::GameLoop()
@@ -45,6 +46,7 @@ void GameEngine::PushState(GameState* state)
 
 void GameEngine::PopState()
 {
+    delete states.top();
     states.pop();
 }
 
