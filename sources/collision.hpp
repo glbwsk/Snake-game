@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML/Audio.hpp>
 #include "snake.hpp"
 #include "food.hpp"
 
@@ -7,7 +8,7 @@ class Collision
 {
 public:
 
-    Collision()=default;
+    Collision();
     ~Collision()=default;
 
     template<class ObjA, class ObjB>
@@ -19,5 +20,9 @@ public:
 private:
 
     sf::FloatRect boxA, boxB;
+
+    //sounds
+    sf::Sound eatSound, gameOverSound;
+    sf::SoundBuffer buffer1, buffer2;
 
 };

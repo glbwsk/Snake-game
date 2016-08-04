@@ -12,7 +12,7 @@ class Snake
 {
 public:
 
-    Snake(int mapWidth, int mapHeight, int segmentSize, int initLength);
+    Snake(int mapWidth, int mapHeight, int mapBorder, int segmentSize, int initLength);
     ~Snake();
 
     //main methods
@@ -28,6 +28,7 @@ public:
     sf::RectangleShape GetSnakesSegment(unsigned int N);
     void AddSegment(sf::RectangleShape seg);
     int GetSnakeLength();
+    int GetSegSize() { return segmentSize; }
 
     //setters & getters for movement speed
     void SetSpeed(float speed) { this->speed=speed; }
@@ -47,6 +48,6 @@ private:
     float timeSinceSnakeUpdate;
 
     //map resolution
-    int mapWidth, mapHeight;
+    int mapWidth, mapHeight, mapBorder;
 };
 

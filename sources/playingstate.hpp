@@ -21,4 +21,7 @@ private:
     Snake snake;
     Food food;
     Collision collision;
+
+    sf::Sprite bgSprite;
+    sf::Texture bgTexture;
 };

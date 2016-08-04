@@ -1,6 +1,14 @@
 #include "collision.hpp"
 #include <SFML/Graphics.hpp>
-#include <list>
+
+Collision::Collision()
+{
+    if( buffer1.loadFromFile("sounds/gameover.wav") )
+        gameOverSound.setBuffer(buffer1);
+
+    if( buffer2.loadFromFile("sounds/eat.wav") )
+        eatSound.setBuffer(buffer2);
+}
 
 template<class ObjA, class ObjB>
 bool Collision::IsCollision(ObjA objectA, ObjB objectB)
@@ -16,10 +24,12 @@ void Collision::HandleFoodCollision(Snake &snake, Food &food)
 {
     sf::RectangleShape head = snake.GetSnakesSegment(0);
 
-    if ( IsCollision( head, food.GetFoodShape() ) )
+    if( IsCollision( head, food.GetFoodShape() ) )
     {
         snake.SetSpeed(snake.GetSpeed()+0.5);
         snake.AddSegment(snake.GetSnakesSegment(1));
+        food.incrementScore();
+        eatSound.play();
     }
 
     while( IsCollision( head, food.GetFoodShape() ) )
@@ -32,7 +42,10 @@ bool Collision::IsSnakeBodyCollision(Snake snake)
     for(int i=2; i<snake.GetSnakeLength(); ++i)
     {
         if( IsCollision( head, snake.GetSnakesSegment(i) ) )
+        {
+            gameOverSound.play();
             return true;
+        }
     }
     return false;
 }

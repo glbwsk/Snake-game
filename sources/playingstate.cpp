@@ -2,20 +2,24 @@
 #include "snake.hpp"
 #include "food.hpp"
 
-#define MAP_WIDTH 540
-#define MAP_HEIGHT 960
-#define TIME_PER_FRAME 1.0/60
-#define SEG_SIZE 19
+#define MAP_HEIGHT      500
+#define MAP_WIDTH       920
+#define TIME_PER_FRAME  1.0/60
+#define SEG_SIZE        20
+#define LENGTH          5
 
-//THESE CONDITIONS SHOULD BE TRUE:
-//! (SEG_SIZE+1)%MAP_WIDTH==(SEG_SIZE+1)%MAP_HEIGHT==0
-//! foodShape radius == (SEG_SIZE+1)/2
+//THESE CONDITION SHOULD BE TRUE:
+//! (SEG_SIZE)%MAP_WIDTH==(SEG_SIZE)%MAP_HEIGHT==0
+//! foodShape radius == SEG_SIZE/2
+
 
 GameStatePlaying::GameStatePlaying(GameEngine* game)
-: snake( MAP_HEIGHT, MAP_WIDTH, SEG_SIZE, 5 ), food( MAP_HEIGHT, MAP_WIDTH, 10 )
+: snake( MAP_WIDTH, MAP_HEIGHT, SEG_SIZE, SEG_SIZE, LENGTH ), food( MAP_WIDTH, MAP_HEIGHT, SEG_SIZE, SEG_SIZE/2 )
 {
-    timeSinceLastUpdate=0;
     this->game=game;
+    timeSinceLastUpdate=0;
+    if( bgTexture.loadFromFile("textures/bg.jpeg"))
+        bgSprite.setTexture(bgTexture);
 }
 
 void GameStatePlaying::HandleInput()
@@ -51,7 +55,9 @@ void GameStatePlaying::Draw(sf::RenderWindow &window)
     }
 
     window.clear();
+        window.draw(bgSprite);
         snake.DrawSnake(window);
         food.DrawFood(window);
+        food.DrawScore(window);
     window.display();
 }

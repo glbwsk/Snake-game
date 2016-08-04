@@ -5,6 +5,7 @@ int main()
 {
     GameEngine game;
 
+    //TODO: GameStateMenu
     game.PushState(new GameStatePlaying(&game));
 
     game.GameLoop();

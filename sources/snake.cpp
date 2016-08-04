@@ -1,28 +1,29 @@
 #include "Snake.hpp"
 
-Snake::Snake(int mapWidth, int mapHeight, int segmentSize, int initLength)
+Snake::Snake(int mapWidth, int mapHeight, int mapBorder, int segmentSize, int initLength)
 {
     this->mapWidth=mapWidth;
     this->mapHeight=mapHeight;
+    this->mapBorder=mapBorder;
     this->segmentSize=segmentSize;
     this->initLength=initLength;
 
     //speed parameters
     currDirection = Direction::STOP;
-    speed = 15;
+    speed = 10;
     timeSinceSnakeUpdate = 0.0;
 
     //setting first segment
-    singleSegment.setSize( sf::Vector2f(segmentSize, segmentSize) );
+    singleSegment.setSize( sf::Vector2f(segmentSize-1, segmentSize-1) );
     singleSegment.setFillColor( sf::Color(225, 32, 32) );
-    singleSegment.setPosition( sf::Vector2f(mapWidth/2, mapHeight/2) );
+    singleSegment.setPosition( sf::Vector2f(mapWidth/2, mapHeight/2+10) );
     AddSegment(singleSegment);
 
     //additional starting segments are in different color
     singleSegment.setFillColor( sf::Color(250, 250, 50) );
     for(int i=0; i<initLength-1; i++)
     {
-        singleSegment.move(0, segmentSize+1);
+        singleSegment.move(0, segmentSize);
         AddSegment(singleSegment);
     }
 }
@@ -69,16 +70,16 @@ void Snake::UpdateSnake(const float secElapsed)
         switch (currDirection)
         {
         case Direction::UP:
-            ChangePosition(0, -segmentSize-1);
+            ChangePosition(0, -segmentSize);
             break;
         case Direction::DOWN:
-            ChangePosition(0, segmentSize+1);
+            ChangePosition(0, segmentSize);
             break;
         case Direction::LEFT:
-            ChangePosition(-segmentSize-1, 0);
+            ChangePosition(-segmentSize, 0);
             break;
         case Direction::RIGHT:
-            ChangePosition(segmentSize+1, 0);
+            ChangePosition(segmentSize, 0);
             break;
         case Direction::STOP:
             break;
@@ -104,8 +105,8 @@ void Snake::ChangePosition(float x, float y)
 
 float Snake::FloatMod(float num, float modulo)
 {
-    if( num >= modulo ) return num-modulo;
-    else if( num < 0 ) return modulo;
+    if( num >= modulo+mapBorder ) return mapBorder;
+    else if( num < mapBorder ) return modulo;
     else return num;
 }
 

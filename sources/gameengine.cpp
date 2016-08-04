@@ -7,7 +7,7 @@
 
 GameEngine::GameEngine()
 {
-    window.create(sf::VideoMode(960, 540), "SNAKE");
+    window.create(sf::VideoMode(960, 560), "SNAKE");
     window.setFramerateLimit(60);
     gameRunning=true;
     srand(time(NULL));
