@@ -15,6 +15,10 @@ public:
     void SetRandomizedPosition();
     void DrawScore(sf::RenderWindow &window);
 
+    //best score handling, reading from file
+    int ReadBestScore();
+    bool SetBestScore();
+
     //setters & getters
     sf::CircleShape GetFoodShape() { return foodShape; };
     void incrementScore() { score++; }
@@ -26,8 +30,10 @@ private:
 
     //variables for score display
     int score;
+    int bestScore;
     sf::Font font;
-    sf::Text text;
+    sf::Text scoreText;
+    sf::Text bestScoreText;
 
     //map resolution
     int mapWidth, mapHeight, mapBorder;

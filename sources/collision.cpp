@@ -26,10 +26,10 @@ void Collision::HandleFoodCollision(Snake &snake, Food &food)
 
     if( IsCollision( head, food.GetFoodShape() ) )
     {
+        eatSound.play();
         snake.SetSpeed(snake.GetSpeed()+0.5);
         snake.AddSegment(snake.GetSnakesSegment(1));
         food.incrementScore();
-        eatSound.play();
     }
 
     while( IsCollision( head, food.GetFoodShape() ) )
@@ -44,6 +44,7 @@ bool Collision::IsSnakeBodyCollision(Snake snake)
         if( IsCollision( head, snake.GetSnakesSegment(i) ) )
         {
             gameOverSound.play();
+            sf::sleep(sf::seconds(0.5));
             return true;
         }
     }

@@ -35,6 +35,10 @@ void GameStatePlaying::Update(const float secElapsed)
         //conditiion switching GameStatePlaying to GameStateDead
         if ( collision.IsSnakeBodyCollision(snake) )
         {
+            if( food.SetBestScore() )
+            {
+                //TODO: GameSteateDeadBest
+            }
             //TODO: GameStateDead
             game->PushState(new GameStatePlaying(game));
         }

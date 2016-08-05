@@ -29,10 +29,15 @@ void GameEngine::GameLoop()
 
     while(gameRunning)
     {
+        if(PeekState() == nullptr)
+        {
+            gameRunning=false;
+            break;
+        }
+
         elapsed = clock.restart();
         time = elapsed.asSeconds();
 
-        if(PeekState() == nullptr) continue;
         PeekState()->HandleInput();
         PeekState()->Update(time);
         PeekState()->Draw(window);
