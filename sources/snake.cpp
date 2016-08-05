@@ -60,10 +60,11 @@ void Snake::HandleSnakeInput()
     }
 }
 
-void Snake::UpdateSnake(const float secElapsed)
+void Snake::UpdateSnake(const float secElapsed, bool &updated)
 {
     float speedParam = 1.0/speed;
     timeSinceSnakeUpdate += secElapsed;
+    updated = false;
 
     while(timeSinceSnakeUpdate > speedParam)
     {
@@ -85,6 +86,7 @@ void Snake::UpdateSnake(const float secElapsed)
             break;
         }
         timeSinceSnakeUpdate -= speedParam;
+        updated = true;
     }
 }
 

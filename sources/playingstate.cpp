@@ -24,7 +24,7 @@ GameStatePlaying::GameStatePlaying(GameEngine* game)
 
 void GameStatePlaying::HandleInput()
 {
-    snake.HandleSnakeInput();
+    if (updated) snake.HandleSnakeInput();
 }
 
 void GameStatePlaying::Update(const float secElapsed)
@@ -44,7 +44,7 @@ void GameStatePlaying::Update(const float secElapsed)
         }
 
         collision.HandleFoodCollision(snake, food);
-        snake.UpdateSnake(secElapsed);
+        snake.UpdateSnake(secElapsed, updated);
         timeSinceLastUpdate -= TIME_PER_FRAME;
     }
 }

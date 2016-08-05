@@ -18,7 +18,7 @@ public:
     //main methods
     void DrawSnake(sf::RenderWindow &window);
     void HandleSnakeInput();
-    void UpdateSnake(const float secElapsed);
+    void UpdateSnake(const float secElapsed, bool &updated);
     void ChangePosition(float x, float y);
 
     //utils

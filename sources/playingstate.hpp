@@ -18,6 +18,7 @@ public:
 private:
 
     float timeSinceLastUpdate;
+    bool updated;
     Snake snake;
     Food food;
     Collision collision;
