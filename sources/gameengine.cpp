@@ -7,8 +7,11 @@
 
 GameEngine::GameEngine()
 {
-    window.create(sf::VideoMode(960, 560), "SNAKE");
-    window.setFramerateLimit(60);
+    winWidth = 960;
+    winHeight = 560;
+    maxFrames = 60;
+    window.create(sf::VideoMode(winWidth, winHeight), "SNAKE");
+    window.setFramerateLimit(maxFrames);
     gameRunning=true;
     srand(time(NULL));
 }
@@ -60,6 +63,7 @@ void GameEngine::ChangeState(GameState* state)
     if(!states.empty())
         PopState();
     PushState(state);
+    GameLoop();
 }
 
 GameState* GameEngine::PeekState()

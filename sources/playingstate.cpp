@@ -4,11 +4,10 @@
 
 #define MAP_HEIGHT      500
 #define MAP_WIDTH       920
-#define TIME_PER_FRAME  1.0/60
 #define SEG_SIZE        20
 #define LENGTH          5
 
-//THESE CONDITION SHOULD BE TRUE:
+//THESE CONDITIONS SHOULD BE TRUE:
 //! (SEG_SIZE)%MAP_WIDTH==(SEG_SIZE)%MAP_HEIGHT==0
 //! foodShape radius == SEG_SIZE/2
 
@@ -17,7 +16,8 @@ GameStatePlaying::GameStatePlaying(GameEngine* game)
 : snake( MAP_WIDTH, MAP_HEIGHT, SEG_SIZE, SEG_SIZE, LENGTH ), food( MAP_WIDTH, MAP_HEIGHT, SEG_SIZE, SEG_SIZE/2 )
 {
     this->game=game;
-    timeSinceLastUpdate=0;
+    timeSinceLastUpdate = 0;
+    timePerFrame = 1.0/game->GetFrameLimit();
     if( bgTexture.loadFromFile("textures/bg.jpeg"))
         bgSprite.setTexture(bgTexture);
 }
@@ -30,7 +30,7 @@ void GameStatePlaying::HandleInput()
 void GameStatePlaying::Update(const float secElapsed)
 {
     timeSinceLastUpdate += secElapsed;
-    while(timeSinceLastUpdate > TIME_PER_FRAME)
+    while(timeSinceLastUpdate > timePerFrame )
     {
         //conditiion switching GameStatePlaying to GameStateDead
         if ( collision.IsSnakeBodyCollision(snake) )
@@ -45,7 +45,7 @@ void GameStatePlaying::Update(const float secElapsed)
 
         collision.HandleFoodCollision(snake, food);
         snake.UpdateSnake(secElapsed, updated);
-        timeSinceLastUpdate -= TIME_PER_FRAME;
+        timeSinceLastUpdate -= timePerFrame;
     }
 }
 

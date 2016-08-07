@@ -18,6 +18,7 @@ public:
 private:
 
     float timeSinceLastUpdate;
+    float timePerFrame;
     bool updated;
     Snake snake;
     Food food;
