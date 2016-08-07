@@ -13,8 +13,8 @@ Collision::Collision()
 template<class ObjA, class ObjB>
 bool Collision::IsCollision(ObjA objectA, ObjB objectB)
 {
-    boxA = objectA.getGlobalBounds();
-    boxB = objectB.getGlobalBounds();
+    sf::FloatRect boxA = objectA.getGlobalBounds();
+    sf::FloatRect boxB = objectB.getGlobalBounds();
 
     if( boxA.intersects( boxB ) ) return true;
     else return false;

@@ -13,7 +13,7 @@ class Snake
 public:
 
     Snake(int mapWidth, int mapHeight, int mapBorder, int segmentSize, int initLength);
-    ~Snake();
+    ~Snake()=default;
 
     //main methods
     void DrawSnake(sf::RenderWindow &window);

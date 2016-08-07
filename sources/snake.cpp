@@ -28,11 +28,6 @@ Snake::Snake(int mapWidth, int mapHeight, int mapBorder, int segmentSize, int in
     }
 }
 
-Snake::~Snake()
-{
-    while(!snakeSegments.empty()) snakeSegments.pop_back();
-}
-
 void Snake::DrawSnake(sf::RenderWindow &window)
 {
     for(const auto& segment : snakeSegments)
@@ -114,7 +109,7 @@ float Snake::FloatMod(float num, float modulo)
 
 sf::RectangleShape Snake::GetSnakesSegment(unsigned int N)
 {
-    std::list<sf::RectangleShape>::iterator seg = snakeSegments.begin();
+    auto seg = snakeSegments.begin();
     if (snakeSegments.size() > N)
     {
         std::advance(seg, N);

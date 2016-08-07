@@ -1,15 +1,13 @@
 #pragma once
 
 #include "gamestate.hpp"
-#include "food.hpp"
-#include "collision.hpp"
 
-class GameStatePlaying : public GameState
+class GameStateMenu : public GameState
 {
 public:
 
-    GameStatePlaying(GameEngine* game);
-    ~GameStatePlaying()=default;
+    GameStateMenu(GameEngine* game);
+    ~GameStateMenu()=default;
 
     virtual void Draw(sf::RenderWindow &window) override;
     virtual void Update(const float secElapsed) override;
@@ -18,12 +16,10 @@ public:
 private:
 
     float timeSinceLastUpdate;
-    float timePerFrame;
-    bool updated;
-    Snake snake;
-    Food food;
-    Collision collision;
 
     sf::Sprite bgSprite;
     sf::Texture bgTexture;
+    sf::Font font;
+    sf::Text text[3];
+
 };
