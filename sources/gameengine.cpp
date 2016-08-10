@@ -63,7 +63,6 @@ void GameEngine::ChangeState(GameState* state)
     if(!states.empty())
         PopState();
     PushState(state);
-    GameLoop();
 }
 
 GameState* GameEngine::PeekState()

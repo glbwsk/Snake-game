@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gamestate.hpp"
+#include <vector>
 
 class GameStateMenu : public GameState
 {
@@ -16,10 +17,12 @@ public:
 private:
 
     float timeSinceLastUpdate;
+    int textCount;
 
     sf::Sprite bgSprite;
     sf::Texture bgTexture;
     sf::Font font;
-    sf::Text text[3];
-
+    std::vector<sf::Text> textArr;
+    sf::Text text;
+    sf::Vector2i mouse;
 };

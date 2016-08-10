@@ -6,9 +6,9 @@ int main()
 {
     GameEngine game;
 
-    //!TODO: GameStateMenu
-    //game.ChangeState(new GameStateMenu( &game ));
-    game.ChangeState(new GameStatePlaying(&game));
+    game.ChangeState(new GameStateMenu(&game));
+
+    game.GameLoop();
 
     return 0;
 }

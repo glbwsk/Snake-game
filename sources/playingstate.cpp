@@ -1,4 +1,5 @@
 #include "playingstate.hpp"
+#include "menustate.hpp"
 #include "snake.hpp"
 #include "food.hpp"
 
@@ -25,6 +26,13 @@ GameStatePlaying::GameStatePlaying(GameEngine* game)
 void GameStatePlaying::HandleInput()
 {
     if (updated) snake.HandleSnakeInput();
+
+    //conditiion switching GameStatePlaying to GameStateDead
+    if ( collision.IsSnakeBodyCollision(snake) )
+    {
+        //TODO: GameStateDead
+        game->ChangeState(new GameStateMenu(game));
+    }
 }
 
 void GameStatePlaying::Update(const float secElapsed)
@@ -32,17 +40,6 @@ void GameStatePlaying::Update(const float secElapsed)
     timeSinceLastUpdate += secElapsed;
     while(timeSinceLastUpdate > timePerFrame )
     {
-        //conditiion switching GameStatePlaying to GameStateDead
-        if ( collision.IsSnakeBodyCollision(snake) )
-        {
-            if( food.SetBestScore() )
-            {
-                //TODO: GameSteateDeadBest
-            }
-            //TODO: GameStateDead
-            game->PushState(new GameStatePlaying(game));
-        }
-
         collision.HandleFoodCollision(snake, food);
         snake.UpdateSnake(secElapsed, updated);
         timeSinceLastUpdate -= timePerFrame;
