@@ -1,0 +1,6 @@
+#C::B files
+*.cbp
+*.layout
+*.depend
+sources/bin/*
+sources/obj/*
