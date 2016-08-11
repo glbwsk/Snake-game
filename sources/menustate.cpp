@@ -1,7 +1,6 @@
 #include "menustate.hpp"
 #include "playingstate.hpp"
 #include "SFML/Graphics.hpp"
-#include "windows.h"
 
 GameStateMenu::GameStateMenu(GameEngine* game)
 {
@@ -68,9 +67,9 @@ void GameStateMenu::Update(const float secElapsed)
 
 void GameStateMenu::HandleInput()
 {
-    if(textArr[1].getColor() == sf::Color::Blue && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if( textArr[1].getColor() == sf::Color::Blue && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
         game->ChangeState(new GameStatePlaying(game));
-    else if(textArr[2].getColor() == sf::Color::Blue && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    else if( textArr[2].getColor() == sf::Color::Blue && sf::Mouse::isButtonPressed(sf::Mouse::Left) )
         game->Quit();
     else return;
 }

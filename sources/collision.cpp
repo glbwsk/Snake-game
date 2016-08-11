@@ -36,7 +36,7 @@ void Collision::HandleFoodCollision(Snake &snake, Food &food)
         food.SetRandomizedPosition();
 }
 
-bool Collision::IsSnakeBodyCollision(Snake &snake)
+bool Collision::IsSnakeBodyCollision(Snake snake)
 {
     sf::RectangleShape head = snake.GetSnakesSegment(0);
     for(int i=2; i<snake.GetSnakeLength(); ++i)

@@ -1,6 +1,5 @@
 #include "deadstate.hpp"
 #include "menustate.hpp"
-#include "conio.h"
 
 GameStateDead::GameStateDead(GameEngine* game)
 {

@@ -60,7 +60,6 @@ void Food::DrawScore(sf::RenderWindow &window)
 int Food::ReadBestScore()
 {
     std::ifstream file("data/score");
-
     if(file.is_open())
     {
         file>>bestScore;
@@ -74,12 +73,11 @@ int Food::ReadBestScore()
 bool Food::SetBestScore()
 {
     std::ofstream file("data/score");
-
     if(file.is_open())
     {
         if(bestScore < score)
         {
-            bestScore=score;
+            bestScore = score;
             file<<bestScore;
             file.close();
             return true;
@@ -90,7 +88,6 @@ bool Food::SetBestScore()
             file.close();
         }
     }
-
     return false;
 }
 
