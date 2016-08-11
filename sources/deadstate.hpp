@@ -17,7 +17,6 @@ private:
 
     sf::Font font;
     sf::Text textGameOver, textInfo;
-    bool keyPressed;
     float timeRunning;
     sf::Texture bgTexture;
     sf::Sprite bgSprite;

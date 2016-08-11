@@ -5,7 +5,6 @@
 GameStateDead::GameStateDead(GameEngine* game)
 {
     this->game=game;
-    keyPressed = false;
     timeRunning = 0;
     sf::sleep(sf::seconds(0.5));
 
