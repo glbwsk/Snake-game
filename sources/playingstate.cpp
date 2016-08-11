@@ -28,7 +28,7 @@ void GameStatePlaying::HandleInput()
     if (updated) snake.HandleSnakeInput();
 
     //conditiion switching GameStatePlaying to GameStateDead
-    if ( collision.IsSnakeBodyCollision(snake) && !updated )
+    if ( collision.IsSnakeBodyCollision(snake, food) && !updated )
     {
         game->ChangeState(new GameStateDead(game));
     }

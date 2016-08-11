@@ -15,7 +15,7 @@ public:
     bool IsCollision(ObjA objectA, ObjB objectB);
 
     void HandleFoodCollision(Snake &snake, Food &food);
-    bool IsSnakeBodyCollision(Snake snake);
+    bool IsSnakeBodyCollision(Snake snake, Food food);
 
 private:
 
