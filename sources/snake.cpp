@@ -109,12 +109,12 @@ float Snake::FloatMod(float num, float modulo)
 
 sf::RectangleShape Snake::GetSnakesSegment(unsigned int N)
 {
-    auto seg = snakeSegments.begin();
+    auto segIterator = snakeSegments.begin();
     if (snakeSegments.size() > N)
     {
-        std::advance(seg, N);
+        std::advance(segIterator, N);
     }
-    return *seg;
+    return *segIterator;
 }
 
 void Snake::AddSegment(sf::RectangleShape seg)

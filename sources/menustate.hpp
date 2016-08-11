@@ -16,9 +16,7 @@ public:
 
 private:
 
-    float timeSinceLastUpdate;
     int textCount;
-
     sf::Font font;
     std::vector<sf::Text> textArr;
     sf::Text text;

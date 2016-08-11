@@ -1,5 +1,5 @@
 #include "playingstate.hpp"
-#include "menustate.hpp"
+#include "deadstate.hpp"
 #include "snake.hpp"
 #include "food.hpp"
 
@@ -28,10 +28,9 @@ void GameStatePlaying::HandleInput()
     if (updated) snake.HandleSnakeInput();
 
     //conditiion switching GameStatePlaying to GameStateDead
-    if ( collision.IsSnakeBodyCollision(snake) )
+    if ( collision.IsSnakeBodyCollision(snake) && !updated )
     {
-        //TODO: GameStateDead
-        game->ChangeState(new GameStateMenu(game));
+        game->ChangeState(new GameStateDead(game));
     }
 }
 
@@ -56,9 +55,11 @@ void GameStatePlaying::Draw(sf::RenderWindow &window)
     }
 
     window.clear();
-        window.draw(bgSprite);
-        snake.DrawSnake(window);
-        food.DrawFood(window);
-        food.DrawScore(window);
+
+    window.draw(bgSprite);
+    snake.DrawSnake(window);
+    food.DrawFood(window);
+    food.DrawScore(window);
+
     window.display();
 }

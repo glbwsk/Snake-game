@@ -10,7 +10,7 @@ GameEngine::GameEngine()
     winWidth = 960;
     winHeight = 560;
     maxFrames = 60;
-    window.create(sf::VideoMode(winWidth, winHeight), "SNAKE");
+    window.create(sf::VideoMode(winWidth, winHeight), "SNAKE", sf::Style::Close);
     window.setFramerateLimit(maxFrames);
     gameRunning=true;
     srand(time(NULL));

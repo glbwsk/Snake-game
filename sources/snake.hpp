@@ -40,7 +40,7 @@ private:
     std::list<sf::RectangleShape> snakeSegments;
     sf::RectangleShape singleSegment;
     int segmentSize;
-    int initLength;
+    unsigned int initLength;
 
     //movement
     Direction currDirection;

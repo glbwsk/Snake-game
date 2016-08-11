@@ -6,8 +6,8 @@
 GameStateMenu::GameStateMenu(GameEngine* game)
 {
     this->game=game;
-    timeSinceLastUpdate = 0;
     textCount = 3;
+
     mousePositon.x = 0;
     mousePositon.y = 0;
 

@@ -23,6 +23,7 @@ public:
     int GetWinHeight() { return winHeight; }
     int GetWinWidth() { return winWidth; }
     int GetFrameLimit() { return maxFrames; }
+    sf::RenderWindow* GetWindow() { return &window; }
 
 private:
 
