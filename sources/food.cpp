@@ -25,9 +25,14 @@ Food::Food(int mapWidth, int mapHeight, int mapBorder, int radius )
         scoreText.setColor(sf::Color::White);
         bestScoreText=scoreText;
 
-        //set these to fit the game window
+        std::ostringstream ss;
+        ss<<"Best Score: "<<bestScore;
+        bestScoreText.setString(ss.str());
+
+        //set these fit the game window
         scoreText.setPosition(mapBorder, mapHeight+mapBorder);
-        bestScoreText.setPosition(mapWidth-245, mapHeight+mapBorder);
+        bestScoreText.setPosition(mapWidth-bestScoreText.getGlobalBounds().width,
+                                  mapHeight+mapBorder);
     }
 }
 
@@ -46,14 +51,12 @@ void Food::SetRandomizedPosition()
 
 void Food::DrawScore(sf::RenderWindow &window)
 {
-    std::ostringstream ss1, ss2;
+    std::ostringstream ss;
 
-    ss1<<"Score: "<<score;
-    scoreText.setString(ss1.str());
+    ss<<"Score: "<<score;
+    scoreText.setString(ss.str());
+
     window.draw(scoreText);
-
-    ss2<<"Best Score: "<<bestScore;
-    bestScoreText.setString(ss2.str());
     window.draw(bestScoreText);
 }
 
