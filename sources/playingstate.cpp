@@ -19,7 +19,7 @@ GameStatePlaying::GameStatePlaying(GameEngine* game)
     this->game=game;
     timeSinceLastUpdate = 0;
     timePerFrame = 1.0/game->GetFrameLimit();
-    if( bgTexture.loadFromFile("textures/bg.jpeg"))
+    if( bgTexture.loadFromFile("textures/bg.png") )
         bgSprite.setTexture(bgTexture);
 }
 

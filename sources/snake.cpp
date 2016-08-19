@@ -15,7 +15,7 @@ Snake::Snake(int mapWidth, int mapHeight, int mapBorder, int segmentSize, int in
 
     //setting first segment
     singleSegment.setSize( sf::Vector2f(segmentSize-1, segmentSize-1) );
-    singleSegment.setFillColor( sf::Color(225, 32, 32) );
+    singleSegment.setFillColor( sf::Color(225, 100, 32) );
     singleSegment.setPosition( sf::Vector2f(mapWidth/2, mapHeight/2+10) );
     AddSegment(singleSegment);
 
