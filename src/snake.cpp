@@ -1,4 +1,4 @@
-#include "Snake.hpp"
+#include "snake.hpp"
 
 Snake::Snake(int mapWidth, int mapHeight, int mapBorder, int segmentSize, int initLength)
 {
