@@ -19,7 +19,7 @@ configure_file(
 include_directories("includes") 
 
 # Define sources and executable
-file(GLOB SOURCES src/*.cpp includes/*)
+file(GLOB SOURCES src/*.cpp)
 set(EXECUTABLE_NAME "myproject")
 add_executable(${EXECUTABLE_NAME} ${SOURCES})
 

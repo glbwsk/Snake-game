@@ -27,7 +27,7 @@ Food::Food(int mapWidth, int mapHeight, int mapBorder, int radius )
 
         std::ostringstream ss;
         ss<<"Best Score: "<<bestScore;
-        bestScoreText.setString(ss.str());
+        bestScoreText.setString( ss.str() );
 
         //set these fit the game window
         scoreText.setPosition(mapBorder, mapHeight+mapBorder);
