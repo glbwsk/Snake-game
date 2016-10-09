@@ -1,2 +1,2 @@
-#define myproject_VERSION_MAJOR @myproject_VERSION_MAJOR@
-#define myproject_VERSION_MINOR @myproject_VERSION_MINOR@
+#define snake-game_VERSION_MAJOR @snake-game_VERSION_MAJOR@
+#define snake-game_VERSION_MINOR @snake-game_VERSION_MINOR@
