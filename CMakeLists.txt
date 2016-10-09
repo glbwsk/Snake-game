@@ -19,13 +19,12 @@ configure_file(
 include_directories("includes") 
 
 # Define sources and executable
-file(GLOB SOURCES src/*.cpp)
+file(GLOB SOURCES src/*.cpp up)
 set(EXECUTABLE_NAME "myproject")
 add_executable(${EXECUTABLE_NAME} ${SOURCES})
 
-
 # Detect and add SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${SFML_ROOT}/cmake/Modules/" ${CMAKE_MODULE_PATH})
 #Find any version 2.X of SFML
 #See the FindSFML.cmake file for additional details and instructions
 find_package(SFML 2 REQUIRED system window graphics audio)
@@ -46,6 +45,3 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_VERSION_MAJOR "${myproject_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${myproject_VERSION_MINOR}")
 include(CPack)
-
-
-
