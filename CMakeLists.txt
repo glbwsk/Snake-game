@@ -19,12 +19,16 @@ configure_file(
 include_directories("includes")
 
 # Define sources and executable
-file(GLOB SOURCES src/*.cpp up)
+file(GLOB SOURCES src/*.cpp includes/*)
 set(EXECUTABLE_NAME "snake-game")
 add_executable(${EXECUTABLE_NAME} WIN32 ${SOURCES} )
 
+
 # Detect and add SFML
-set(CMAKE_MODULE_PATH "${SFML_ROOT}/cmake/Modules/" ${CMAKE_MODULE_PATH})
+if(WIN32)
+	file(COPY "${SFML_ROOT}/cmake" DESTINATION ${PROJECT_SOURCE_DIR})
+	set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/Modules/" ${CMAKE_MODULE_PATH})
+endif(WIN32)
 #Find any version 2.X of SFML
 #See the FindSFML.cmake file for additional details and instructions
 find_package(SFML 2 REQUIRED system window graphics audio)

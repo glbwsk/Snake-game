@@ -4,4 +4,7 @@
 *.depend
 sources/bin/*
 sources/obj/*
-target/*
+
+#other
+target/
+cmake/
